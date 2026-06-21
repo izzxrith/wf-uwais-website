@@ -1,0 +1,26 @@
+To pick back up next time :
+
+1. Open a terminal
+2. Navigate to your project:
+fish   
+    cd ~/Desktop/wf-uwais-website
+
+3. Start the dev server again:
+fish   
+    npm run dev
+
+4. Open http://localhost:3000 in your browser
+
+That's it. You don't need to re-run prisma generate, db push, or db seed — those already did their job 
+(generated the client code, synced the schema, seeded the data). You'd only re-run those if you change the schema later (add a new field/table) or if something goes wrong.
+
+One habit worth building now
+
+Since this is a real project (and eventually goes on GitHub for your portfolio), get in the habit of committing
+your work before you stop for the day:
+fish
+git add .
+git commit -m "describe what you did today"
+
+We haven't actually set up the GitHub repo connection yet for this project — want to do that next? 
+It's a good Week 1 task to close out, and it means your work is backed up somewhere beyond just your laptop.

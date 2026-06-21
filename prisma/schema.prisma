@@ -1,0 +1,70 @@
+// Prisma schema for WF Uwais Enterprise website
+// Docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// The 4 services the company offers (seeded once, rarely changes)
+model Service {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String
+  // order to display services on the site (1, 2, 3, 4...)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  quoteRequests QuoteRequest[]
+}
+
+// Each "Get a Quote" form submission
+model QuoteRequest {
+  id            String   @id @default(cuid())
+  customerName  String
+  phone         String
+  email         String?
+  // free text so we don't lose leads from outside Seremban/Melaka
+  location      String
+  propertyType  String?
+  preferredDate DateTime?
+  notes         String?
+
+  serviceId String
+  service   Service @relation(fields: [serviceId], references: [id])
+
+  // lifecycle: NEW -> CONTACTED -> DONE (or ARCHIVED)
+  status    QuoteStatus @default(NEW)
+  adminNote String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum QuoteStatus {
+  NEW
+  CONTACTED
+  DONE
+  ARCHIVED
+}
+
+// Past/current clients shown in the "Our Clients" section
+model ClientShowcase {
+  id        String  @id @default(cuid())
+  name      String
+  logoUrl   String?
+  sortOrder Int     @default(0)
+}
+
+// Admin users who can log into the dashboard
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String?
+  createdAt    DateTime @default(now())
+}
