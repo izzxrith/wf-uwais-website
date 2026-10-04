@@ -1,0 +1,230 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
+
+/* ── Token system ──────────────────────────────────────────── */
+:root {
+  --forest:  #0E2318;
+  --forest2: #162c1e;
+  --moss:    #1C5C35;
+  --moss-lt: #2a7a48;
+  --sage:    #E4EFE7;
+  --sage-dk: #c8dece;
+  --gold:    #C9943A;
+  --gold-lt: #d9a94e;
+  --ink:     #111A14;
+  --body:    #3d5244;
+  --muted:   #7a9484;
+  --border:  #d0ddd4;
+  --surface: #ffffff;
+
+  /* Emil curves — never ease-in */
+  --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-inout:  cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ── Reset ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--surface);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+.display { font-family: 'Playfair Display', Georgia, serif; }
+
+/* ── Hero stagger — one orchestrated moment only ───────────── */
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-stagger > * {
+  opacity: 0;
+  animation: riseIn 500ms var(--ease-out) forwards;
+}
+.hero-stagger > *:nth-child(1) { animation-delay:  80ms; }
+.hero-stagger > *:nth-child(2) { animation-delay: 180ms; }
+.hero-stagger > *:nth-child(3) { animation-delay: 280ms; }
+.hero-stagger > *:nth-child(4) { animation-delay: 360ms; }
+
+/* ── Buttons ───────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .9375rem;
+  font-weight: 500;
+  line-height: 1;
+  padding: .75rem 1.5rem;
+  border-radius: .375rem;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  /* Specify exact properties, never `all` */
+  transition:
+    background-color 150ms var(--ease-out),
+    color            150ms var(--ease-out),
+    border-color     150ms var(--ease-out),
+    opacity          150ms var(--ease-out),
+    transform        120ms var(--ease-out);
+}
+/* Press feedback — scale(0.97), 120ms per Emil */
+.btn:active { transform: scale(0.97); transition-duration: 100ms; }
+
+/* Gold — rationed to primary CTAs only */
+.btn-gold {
+  background: var(--gold);
+  color: var(--forest);
+  font-weight: 600;
+}
+@media (hover: hover) and (pointer: fine) {
+  .btn-gold:hover { background: var(--gold-lt); }
+}
+
+/* Outline — secondary */
+.btn-outline {
+  background: transparent;
+  color: white;
+  border: 1.5px solid rgba(255,255,255,.3);
+}
+@media (hover: hover) and (pointer: fine) {
+  .btn-outline:hover {
+    background: rgba(255,255,255,.06);
+    border-color: rgba(255,255,255,.5);
+  }
+}
+
+/* Green — internal CTAs */
+.btn-moss {
+  background: var(--moss);
+  color: white;
+  font-weight: 600;
+}
+@media (hover: hover) and (pointer: fine) {
+  .btn-moss:hover { background: var(--moss-lt); }
+}
+
+/* Ghost — subtle */
+.btn-ghost {
+  background: transparent;
+  color: var(--moss);
+  border: 1.5px solid var(--border);
+}
+@media (hover: hover) and (pointer: fine) {
+  .btn-ghost:hover { border-color: var(--moss); }
+}
+
+/* ── Form fields ───────────────────────────────────────────── */
+.field { display: flex; flex-direction: column; gap: .375rem; }
+.field label {
+  font-size: .8125rem;
+  font-weight: 500;
+  color: var(--body);
+  letter-spacing: .01em;
+}
+.field input,
+.field select,
+.field textarea {
+  font-family: 'DM Sans', sans-serif;
+  font-size: .9375rem;
+  color: var(--ink);
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: .375rem;
+  padding: .625rem .875rem;
+  width: 100%;
+  outline: none;
+  appearance: none;
+  transition:
+    border-color 150ms var(--ease-out),
+    box-shadow   150ms var(--ease-out);
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--moss);
+  box-shadow: 0 0 0 3px rgba(28,92,53,.1);
+}
+.field input::placeholder,
+.field textarea::placeholder { color: var(--muted); opacity: 1; }
+.field textarea { resize: vertical; min-height: 6.5rem; }
+
+/* ── Service card ──────────────────────────────────────────── */
+.svc-card {
+  padding: 1.75rem 1.5rem 1.75rem 1.875rem;
+  border: 1.5px solid var(--border);
+  border-left: 3px solid var(--moss);
+  border-radius: .5rem;
+  background: white;
+  transition:
+    border-color   180ms var(--ease-out),
+    box-shadow     180ms var(--ease-out),
+    transform      180ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .svc-card:hover {
+    border-color: var(--moss);
+    box-shadow: 0 6px 20px rgba(14,35,24,.08);
+    transform: translateY(-2px);
+  }
+}
+
+/* ── Client badge ──────────────────────────────────────────── */
+.client-badge {
+  padding: .5rem 1rem;
+  border: 1.5px solid var(--border);
+  border-radius: .25rem;
+  font-size: .875rem;
+  color: var(--body);
+  background: white;
+  transition: border-color 150ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .client-badge:hover { border-color: var(--sage-dk); }
+}
+
+/* ── USP row ───────────────────────────────────────────────── */
+.usp-row {
+  display: flex;
+  align-items: flex-start;
+  gap: .875rem;
+  padding: 1.125rem 1.25rem;
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: .5rem;
+  transition: border-color 150ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .usp-row:hover { border-color: var(--sage-dk); }
+}
+
+/* ── Sweep cut (one signature element) ────────────────────── */
+.sweep {
+  position: relative;
+  padding-bottom: 4rem;
+}
+.sweep::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 4rem;
+  background: var(--surface);
+  clip-path: polygon(0 100%, 100% 0, 100% 100%);
+  pointer-events: none;
+}
+
+/* ── Reduced motion ────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

@@ -1,0 +1,46 @@
+generator client { provider = "prisma-client-js" }
+datasource db { provider = "postgresql" }
+
+model Service {
+  id            String         @id @default(cuid())
+  name          String
+  slug          String         @unique
+  description   String
+  sortOrder     Int            @default(0)
+  createdAt     DateTime       @default(now())
+  quoteRequests QuoteRequest[]
+}
+
+model QuoteRequest {
+  id            String      @id @default(cuid())
+  customerName  String
+  phone         String
+  email         String?
+  location      String
+  propertyType  String?
+  preferredDate DateTime?
+  notes         String?
+  serviceId     String
+  service       Service     @relation(fields: [serviceId], references: [id])
+  status        QuoteStatus @default(NEW)
+  adminNote     String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+enum QuoteStatus { NEW CONTACTED DONE ARCHIVED }
+
+model ClientShowcase {
+  id        String  @id @default(cuid())
+  name      String
+  logoUrl   String?
+  sortOrder Int     @default(0)
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String?
+  createdAt    DateTime @default(now())
+}
