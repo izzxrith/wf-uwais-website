@@ -1,5 +1,10 @@
-generator client { provider = "prisma-client-js" }
-datasource db { provider = "postgresql" }
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
 
 model Service {
   id            String         @id @default(cuid())
@@ -28,7 +33,12 @@ model QuoteRequest {
   updatedAt     DateTime    @updatedAt
 }
 
-enum QuoteStatus { NEW CONTACTED DONE ARCHIVED }
+enum QuoteStatus {
+  NEW
+  CONTACTED
+  DONE
+  ARCHIVED
+}
 
 model ClientShowcase {
   id        String  @id @default(cuid())

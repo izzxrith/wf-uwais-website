@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { COMPANY, SERVICES } from "@/lib/constants";
 
