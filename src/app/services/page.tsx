@@ -51,6 +51,14 @@ export default function ServicesPage() {
           <Link href="/contact" className="btn btn-gold">Get a Quote</Link>
         </div>
       </section>
+
+      {/* Flow CTA — leads to Gallery */}
+      <section style={{ padding: "3.5rem 1.5rem", background: "var(--surface)", textAlign: "center", borderTop: "1.5px solid var(--border)" }}>
+        <p style={{ color: "var(--muted)", fontSize: ".9375rem", marginBottom: ".75rem" }}>Want to see the results for yourself?</p>
+        <Link href="/gallery" className="btn btn-ghost" style={{ color: "var(--moss)", borderColor: "var(--moss)" }}>
+          See our work →
+        </Link>
+      </section>
     </>
   );
 }

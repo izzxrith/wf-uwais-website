@@ -66,15 +66,20 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Flow CTA — leads to Contact */}
       <section style={{ padding: "5rem 1.5rem", background: "var(--forest)" }}>
         <div style={{ maxWidth: "72rem", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr auto", gap: "2rem", alignItems: "center" }} className="cta-grid">
           <div>
             <h2 className="display" style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)", color: "white", fontWeight: 400, letterSpacing: "-.02em", marginBottom: ".5rem" }}>
-              Let&apos;s work together
+              Ready to work with us?
             </h2>
-            <p style={{ color: "rgba(255,255,255,.5)" }}>{COMPANY.phone} · {COMPANY.email}</p>
+            <p style={{ color: "rgba(255,255,255,.5)" }}>
+              {COMPANY.phone} · {COMPANY.email}
+            </p>
           </div>
-          <Link href="/contact" className="btn btn-gold" style={{ padding: ".875rem 2rem" }}>Get a Quote</Link>
+          <Link href="/contact" className="btn btn-gold" style={{ padding: ".875rem 2rem" }}>
+            Get a Quote
+          </Link>
         </div>
       </section>
 

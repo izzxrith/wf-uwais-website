@@ -63,9 +63,16 @@ export default function GalleryPage() {
         </div>
       </section>
 
+      {/* Flow CTA — leads to About */}
       <section style={{ padding: "4rem 1.5rem", background: "var(--sage)", textAlign: "center" }}>
-        <h2 className="display" style={{ fontSize: "1.875rem", fontWeight: 400, marginBottom: "1.25rem", color: "var(--ink)" }}>Want results like these?</h2>
-        <Link href="/contact" className="btn btn-moss">Request a Quote</Link>
+        <p style={{ color: "var(--muted)", fontSize: ".9375rem", marginBottom: ".5rem" }}>Curious about who we are?</p>
+        <h2 className="display" style={{ fontSize: "1.875rem", fontWeight: 400, marginBottom: "1.5rem", color: "var(--ink)" }}>
+          Meet the team behind the work.
+        </h2>
+        <div style={{ display: "flex", gap: ".75rem", justifyContent: "center", flexWrap: "wrap" }}>
+          <Link href="/about" className="btn btn-moss">About Us</Link>
+          <Link href="/contact" className="btn btn-ghost" style={{ color: "var(--moss)", borderColor: "var(--moss)" }}>Get a Quote</Link>
+        </div>
       </section>
     </>
   );
