@@ -14,56 +14,55 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 8);
+    const fn = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", fn, { passive: true });
     return () => window.removeEventListener("scroll", fn);
   }, []);
-
-  const bg = scrolled
-    ? "rgba(10,28,18,0.94)"
-    : "var(--forest)";
 
   return (
     <>
       <header style={{
         position: "sticky", top: 0, zIndex: 50,
-        background: bg,
-        backdropFilter: scrolled ? "blur(14px)" : "none",
-        WebkitBackdropFilter: scrolled ? "blur(14px)" : "none",
-        borderBottom: "1px solid rgba(255,255,255,0.05)",
-        transition: "background 220ms var(--ease-out)",
+        background: scrolled ? "rgba(10,28,18,0.95)" : "var(--forest)",
+        backdropFilter: scrolled ? "blur(16px)" : "none",
+        WebkitBackdropFilter: scrolled ? "blur(16px)" : "none",
+        borderBottom: `1px solid ${scrolled ? "rgba(255,255,255,.07)" : "transparent"}`,
+        transition: "background 220ms var(--ease-out), border-color 220ms var(--ease-out)",
       }}>
-        <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "0 1.5rem", height: "3.5rem", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "0 1.5rem", height: "3.75rem", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
 
           {/* Wordmark */}
-          <Link href="/" onClick={() => setOpen(false)} style={{ textDecoration: "none" }}>
-            <span className="display" style={{ color: "white", fontSize: "1.0625rem", fontWeight: 700, letterSpacing: "-.01em", lineHeight: 1 }}>
+          <Link href="/" onClick={() => setOpen(false)} style={{ textDecoration: "none", display: "flex", alignItems: "baseline", gap: ".5rem" }}>
+            <span className="display" style={{ color: "white", fontSize: "1.125rem", fontWeight: 500, letterSpacing: "-.01em", lineHeight: 1 }}>
               WF Uwais
             </span>
-            <span style={{ color: "rgba(255,255,255,.35)", fontSize: ".8125rem", marginLeft: ".5rem", fontWeight: 400 }}>
+            <span style={{ color: "rgba(255,255,255,.3)", fontSize: ".75rem", fontWeight: 400, letterSpacing: ".02em" }}>
               Enterprise
             </span>
           </Link>
 
-          {/* Desktop */}
-          <nav style={{ display: "flex", alignItems: "center", gap: "2rem" }} className="hide-mobile">
+          {/* Desktop nav */}
+          <div style={{ display: "flex", alignItems: "center", gap: "2.25rem" }} className="hide-mobile">
             {LINKS.map(l => (
               <Link key={l.href} href={l.href} style={{
-                color: "rgba(255,255,255,.65)", fontSize: ".9375rem", fontWeight: 400,
+                color: "rgba(255,255,255,.6)",
+                fontSize: ".9375rem",
+                fontWeight: 400,
                 textDecoration: "none",
                 transition: "color 140ms var(--ease-out)",
+                letterSpacing: "-.01em",
               }}
               onMouseEnter={e => (e.currentTarget.style.color = "white")}
-              onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,.65)")}>
+              onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,.6)")}>
                 {l.label}
               </Link>
             ))}
             <Link href="/contact" className="btn btn-gold" style={{ padding: ".5rem 1.125rem", fontSize: ".875rem" }}>
               Get a Quote
             </Link>
-          </nav>
+          </div>
 
-          {/* Hamburger — animated 3 bars */}
+          {/* Hamburger */}
           <button
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
@@ -73,8 +72,9 @@ export default function Navbar() {
           >
             {[0,1,2].map(i => (
               <span key={i} style={{
-                display: "block", width: "20px", height: "1.5px", background: "white", borderRadius: "2px",
-                transition: "transform 200ms var(--ease-drawer), opacity 200ms var(--ease-out)",
+                display: "block", width: "20px", height: "1.5px",
+                background: "white", borderRadius: "2px",
+                transition: "transform 200ms var(--ease-drawer), opacity 180ms var(--ease-out)",
                 transform: open
                   ? i === 0 ? "translateY(6.5px) rotate(45deg)"
                   : i === 2 ? "translateY(-6.5px) rotate(-45deg)"
@@ -86,7 +86,7 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Mobile drawer — ease-drawer curve */}
+        {/* Mobile drawer */}
         <div style={{
           overflow: "hidden",
           maxHeight: open ? "16rem" : "0",
@@ -98,9 +98,13 @@ export default function Navbar() {
             {LINKS.map(l => (
               <Link key={l.href} href={l.href} onClick={() => setOpen(false)} style={{
                 display: "block", padding: ".625rem 0",
-                color: "rgba(255,255,255,.75)", textDecoration: "none", fontSize: "1rem",
+                color: "rgba(255,255,255,.7)", textDecoration: "none",
+                fontSize: ".9375rem", letterSpacing: "-.01em",
                 borderBottom: "1px solid rgba(255,255,255,.06)",
-              }}>
+                transition: "color 140ms var(--ease-out)",
+              }}
+              onMouseEnter={e => (e.currentTarget.style.color = "white")}
+              onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,.7)")}>
                 {l.label}
               </Link>
             ))}

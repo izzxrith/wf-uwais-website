@@ -1,25 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
 @import "tailwindcss";
 
 /* ── Token system ──────────────────────────────────────────── */
 :root {
-  --forest:  #0E2318;
-  --forest2: #162c1e;
-  --moss:    #1C5C35;
-  --moss-lt: #2a7a48;
-  --sage:    #E4EFE7;
-  --sage-dk: #c8dece;
-  --gold:    #C9943A;
-  --gold-lt: #d9a94e;
-  --ink:     #111A14;
-  --body:    #3d5244;
-  --muted:   #7a9484;
-  --border:  #d0ddd4;
-  --surface: #ffffff;
+  --forest:   #0E2318;
+  --forest2:  #162c1e;
+  --moss:     #1C5C35;
+  --moss-lt:  #2a7a48;
+  --sage:     #E4EFE7;
+  --sage-dk:  #c8dece;
+  --gold:     #C9943A;
+  --gold-lt:  #d9a94e;
+  --ink:      #111A14;
+  --body:     #4a5240;
+  --muted:    #8a9e8f;
+  --border:   #dce6de;
+  --surface:  #F7F6F2;
+  --white:    #ffffff;
 
-  /* Emil curves — never ease-in */
+  /* Emil-correct easing — never ease-in, never ease */
   --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
-  --ease-inout:  cubic-bezier(0.77, 0, 0.175, 1);
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
@@ -36,19 +36,19 @@ body {
 }
 .display { font-family: 'Playfair Display', Georgia, serif; }
 
-/* ── Hero stagger — one orchestrated moment only ───────────── */
+/* ── Hero stagger — ONE orchestrated moment, nothing else ──── */
 @keyframes riseIn {
-  from { opacity: 0; transform: translateY(14px); }
+  from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 .hero-stagger > * {
   opacity: 0;
-  animation: riseIn 500ms var(--ease-out) forwards;
+  animation: riseIn 550ms var(--ease-out) forwards;
 }
-.hero-stagger > *:nth-child(1) { animation-delay:  80ms; }
-.hero-stagger > *:nth-child(2) { animation-delay: 180ms; }
+.hero-stagger > *:nth-child(1) { animation-delay:  60ms; }
+.hero-stagger > *:nth-child(2) { animation-delay: 160ms; }
 .hero-stagger > *:nth-child(3) { animation-delay: 280ms; }
-.hero-stagger > *:nth-child(4) { animation-delay: 360ms; }
+.hero-stagger > *:nth-child(4) { animation-delay: 380ms; }
 
 /* ── Buttons ───────────────────────────────────────────────── */
 .btn {
@@ -60,48 +60,41 @@ body {
   font-weight: 500;
   line-height: 1;
   padding: .75rem 1.5rem;
-  border-radius: .375rem;
+  border-radius: .25rem;
   border: none;
   cursor: pointer;
   text-decoration: none;
   white-space: nowrap;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
-  /* Specify exact properties, never `all` */
   transition:
     background-color 150ms var(--ease-out),
     color            150ms var(--ease-out),
     border-color     150ms var(--ease-out),
-    opacity          150ms var(--ease-out),
-    transform        120ms var(--ease-out);
+    transform        120ms var(--ease-out),
+    box-shadow       150ms var(--ease-out);
 }
-/* Press feedback — scale(0.97), 120ms per Emil */
-.btn:active { transform: scale(0.97); transition-duration: 100ms; }
+.btn:active { transform: scale(0.97); }
 
-/* Gold — rationed to primary CTAs only */
 .btn-gold {
   background: var(--gold);
   color: var(--forest);
   font-weight: 600;
+  letter-spacing: -.01em;
 }
 @media (hover: hover) and (pointer: fine) {
   .btn-gold:hover { background: var(--gold-lt); }
 }
 
-/* Outline — secondary */
 .btn-outline {
   background: transparent;
   color: white;
-  border: 1.5px solid rgba(255,255,255,.3);
+  border: 1.5px solid rgba(255,255,255,.28);
 }
 @media (hover: hover) and (pointer: fine) {
-  .btn-outline:hover {
-    background: rgba(255,255,255,.06);
-    border-color: rgba(255,255,255,.5);
-  }
+  .btn-outline:hover { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.5); }
 }
 
-/* Green — internal CTAs */
 .btn-moss {
   background: var(--moss);
   color: white;
@@ -111,14 +104,13 @@ body {
   .btn-moss:hover { background: var(--moss-lt); }
 }
 
-/* Ghost — subtle */
 .btn-ghost {
   background: transparent;
   color: var(--moss);
   border: 1.5px solid var(--border);
 }
 @media (hover: hover) and (pointer: fine) {
-  .btn-ghost:hover { border-color: var(--moss); }
+  .btn-ghost:hover { border-color: var(--moss); background: rgba(28,92,53,.04); }
 }
 
 /* ── Form fields ───────────────────────────────────────────── */
@@ -135,9 +127,9 @@ body {
   font-family: 'DM Sans', sans-serif;
   font-size: .9375rem;
   color: var(--ink);
-  background: white;
+  background: var(--white);
   border: 1.5px solid var(--border);
-  border-radius: .375rem;
+  border-radius: .25rem;
   padding: .625rem .875rem;
   width: 100%;
   outline: none;
@@ -158,63 +150,89 @@ body {
 
 /* ── Service card ──────────────────────────────────────────── */
 .svc-card {
-  padding: 1.75rem 1.5rem 1.75rem 1.875rem;
+  padding: 2rem;
+  background: var(--white);
   border: 1.5px solid var(--border);
-  border-left: 3px solid var(--moss);
-  border-radius: .5rem;
-  background: white;
+  border-radius: .375rem;
+  position: relative;
   transition:
-    border-color   180ms var(--ease-out),
-    box-shadow     180ms var(--ease-out),
-    transform      180ms var(--ease-out);
+    border-color 180ms var(--ease-out),
+    box-shadow   180ms var(--ease-out),
+    transform    180ms var(--ease-out);
+  overflow: hidden;
+}
+.svc-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: var(--moss);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 250ms var(--ease-out);
 }
 @media (hover: hover) and (pointer: fine) {
-  .svc-card:hover {
-    border-color: var(--moss);
-    box-shadow: 0 6px 20px rgba(14,35,24,.08);
-    transform: translateY(-2px);
-  }
+  .svc-card:hover { border-color: var(--sage-dk); box-shadow: 0 4px 20px rgba(14,35,24,.06); transform: translateY(-1px); }
+  .svc-card:hover::before { transform: scaleX(1); }
 }
 
-/* ── Client badge ──────────────────────────────────────────── */
-.client-badge {
-  padding: .5rem 1rem;
-  border: 1.5px solid var(--border);
-  border-radius: .25rem;
-  font-size: .875rem;
-  color: var(--body);
-  background: white;
-  transition: border-color 150ms var(--ease-out);
-}
-@media (hover: hover) and (pointer: fine) {
-  .client-badge:hover { border-color: var(--sage-dk); }
-}
-
-/* ── USP row ───────────────────────────────────────────────── */
-.usp-row {
+/* ── USP item ──────────────────────────────────────────────── */
+.usp-item {
   display: flex;
   align-items: flex-start;
   gap: .875rem;
   padding: 1.125rem 1.25rem;
-  background: white;
+  background: var(--white);
   border: 1.5px solid var(--border);
-  border-radius: .5rem;
+  border-radius: .375rem;
   transition: border-color 150ms var(--ease-out);
 }
 @media (hover: hover) and (pointer: fine) {
-  .usp-row:hover { border-color: var(--sage-dk); }
+  .usp-item:hover { border-color: var(--sage-dk); }
 }
 
-/* ── Sweep cut (one signature element) ────────────────────── */
+/* ── Stat strip ────────────────────────────────────────────── */
+.stat-strip {
+  display: flex;
+  gap: 0;
+  border-top: 1px solid rgba(255,255,255,.08);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.stat-strip-item {
+  flex: 1;
+  padding: 1.25rem 1.5rem;
+  border-right: 1px solid rgba(255,255,255,.08);
+  text-align: center;
+}
+.stat-strip-item:last-child { border-right: none; }
+
+/* ── Client name list ──────────────────────────────────────── */
+.client-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0;
+}
+.client-name {
+  padding: .625rem 1.25rem;
+  font-size: .9375rem;
+  color: var(--body);
+  border-right: 1px solid var(--border);
+  white-space: nowrap;
+}
+.client-name:first-child { padding-left: 0; }
+.client-name:last-child { border-right: none; }
+
+/* ── Sweep divider ─────────────────────────────────────────── */
 .sweep {
   position: relative;
-  padding-bottom: 4rem;
+  padding-bottom: 3.5rem;
 }
 .sweep::after {
   content: '';
   position: absolute;
   bottom: 0; left: 0;
-  width: 100%; height: 4rem;
+  width: 100%; height: 3.5rem;
   background: var(--surface);
   clip-path: polygon(0 100%, 100% 0, 100% 100%);
   pointer-events: none;

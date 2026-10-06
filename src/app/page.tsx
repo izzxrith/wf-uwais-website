@@ -4,42 +4,63 @@ import { COMPANY, SERVICES, CLIENTS } from "@/lib/constants";
 export default function Home() {
   return (
     <>
-      {/* ── Hero — the one orchestrated moment ───────────────── */}
+      {/* ── Hero ─────────────────────────────────────────────── */}
       <section className="sweep" style={{
-        background: `linear-gradient(145deg, var(--forest) 0%, #0d2b1a 55%, #142d1e 100%)`,
-        padding: "5.5rem 1.5rem 7rem",
+        background: `linear-gradient(150deg, #0a1d10 0%, var(--forest) 50%, #112a1a 100%)`,
+        padding: "6rem 1.5rem 7rem",
         position: "relative",
         overflow: "hidden",
       }}>
-        {/* Subtle concentric ring — texture, not decoration */}
-        <div aria-hidden style={{ position: "absolute", right: "-10%", top: "5%", width: "600px", height: "600px", borderRadius: "50%", border: "1px solid rgba(255,255,255,.04)", pointerEvents: "none" }} />
-        <div aria-hidden style={{ position: "absolute", right: "-18%", top: "-5%", width: "820px", height: "820px", borderRadius: "50%", border: "1px solid rgba(255,255,255,.025)", pointerEvents: "none" }} />
 
-        <div style={{ maxWidth: "72rem", margin: "0 auto" }}>
-          <div className="hero-stagger" style={{ maxWidth: "44rem" }}>
-            {/* Location tag — deliberate, not an eyebrow */}
-            <p style={{ color: "var(--gold)", fontSize: ".875rem", fontWeight: 500, marginBottom: "1.25rem" }}>
+        {/* Watermark — the signature element, visible on desktop */}
+        <div aria-hidden style={{
+          position: "absolute",
+          right: "-2%",
+          top: "50%",
+          transform: "translateY(-50%)",
+          fontFamily: "'Playfair Display', serif",
+          fontSize: "clamp(8rem, 20vw, 18rem)",
+          fontWeight: 700,
+          fontStyle: "italic",
+          color: "rgba(255,255,255,0.035)",
+          lineHeight: 1,
+          userSelect: "none",
+          pointerEvents: "none",
+          whiteSpace: "nowrap",
+          letterSpacing: "-.04em",
+        }}>
+          CLEAN
+        </div>
+
+        <div style={{ maxWidth: "72rem", margin: "0 auto", position: "relative" }}>
+          <div className="hero-stagger" style={{ maxWidth: "42rem" }}>
+            <p style={{
+              color: "var(--gold)",
+              fontSize: ".8125rem",
+              fontWeight: 600,
+              letterSpacing: ".08em",
+              marginBottom: "1.5rem",
+            }}>
               Seremban &amp; Melaka
             </p>
 
-            {/* Headline — Playfair Display, left-aligned, italic is the character */}
             <h1 className="display" style={{
-              fontSize: "clamp(2.625rem, 6vw, 4.25rem)",
+              fontSize: "clamp(3rem, 7vw, 5rem)",
               color: "white",
               fontWeight: 400,
-              lineHeight: 1.12,
-              letterSpacing: "-.02em",
-              marginBottom: "1.5rem",
+              lineHeight: 1.08,
+              letterSpacing: "-.025em",
+              marginBottom: "1.625rem",
             }}>
               Professional cleaning<br />
               you can <em>rely on.</em>
             </h1>
 
             <p style={{
-              color: "rgba(255,255,255,.6)",
-              fontSize: "1.125rem",
+              color: "rgba(255,255,255,.58)",
+              fontSize: "1.0625rem",
               lineHeight: 1.75,
-              maxWidth: "34rem",
+              maxWidth: "32rem",
               marginBottom: "2.25rem",
             }}>
               {COMPANY.mission}
@@ -47,104 +68,173 @@ export default function Home() {
 
             <div style={{ display: "flex", gap: ".75rem", flexWrap: "wrap" }}>
               <Link href="/contact" className="btn btn-gold">Get a Free Quote</Link>
-              <a href={`https://wa.me/${COMPANY.whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
+              <a
+                href={`https://wa.me/${COMPANY.whatsappNumber}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-outline"
+              >
                 <WhatsAppIcon />
                 WhatsApp Us
               </a>
             </div>
           </div>
         </div>
+
+        {/* Stats strip */}
+        <div style={{ maxWidth: "72rem", margin: "3.5rem auto 0", position: "relative" }}>
+          <div className="stat-strip">
+            {[
+              { value: "5+",   label: "Clients served" },
+              { value: "4",    label: "Core services" },
+              { value: "2",    label: "States covered" },
+              { value: "Daily", label: "WhatsApp updates" },
+            ].map(s => (
+              <div key={s.label} className="stat-strip-item">
+                <p style={{ color: "white", fontSize: "1.375rem", fontWeight: 600, fontFamily: "'Playfair Display', serif", lineHeight: 1, marginBottom: ".25rem" }}>{s.value}</p>
+                <p style={{ color: "rgba(255,255,255,.4)", fontSize: ".8125rem" }}>{s.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* ── Services ─────────────────────────────────────────── */}
-      <section style={{ padding: "5rem 1.5rem", background: "var(--surface)" }}>
+      <section style={{ padding: "5.5rem 1.5rem", background: "var(--surface)" }}>
         <div style={{ maxWidth: "72rem", margin: "0 auto" }}>
-          <div style={{ marginBottom: "2.5rem" }}>
-            <h2 className="display" style={{ fontSize: "clamp(1.875rem, 4vw, 2.75rem)", fontWeight: 400, letterSpacing: "-.02em", color: "var(--ink)", marginBottom: ".5rem" }}>
-              Our services
-            </h2>
-            <p style={{ color: "var(--muted)", fontSize: "1rem" }}>
-              Four core offerings, delivered consistently across {COMPANY.serviceAreas[0].split(",")[0]} and {COMPANY.serviceAreas[1]}.
-            </p>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "3rem", flexWrap: "wrap", gap: "1rem" }}>
+            <div>
+              <h2 className="display" style={{ fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 400, letterSpacing: "-.025em", color: "var(--ink)", lineHeight: 1.1 }}>
+                Our services
+              </h2>
+              <p style={{ color: "var(--muted)", fontSize: ".9375rem", marginTop: ".5rem" }}>
+                Four offerings. Consistently delivered.
+              </p>
+            </div>
+            <Link href="/services" className="btn btn-ghost" style={{ fontSize: ".875rem" }}>
+              All services
+            </Link>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(270px, 1fr))", gap: "1.125rem" }}>
-            {SERVICES.map(s => (
+          {/* 2+2 grid with numbered indicators */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1rem" }}>
+            {SERVICES.map((s, i) => (
               <article key={s.slug} className="svc-card">
-                <div style={{ fontSize: "1.875rem", marginBottom: "1rem", lineHeight: 1 }}>{s.icon}</div>
-                <h3 style={{ fontSize: "1.0625rem", fontWeight: 600, color: "var(--ink)", marginBottom: ".5rem" }}>{s.name}</h3>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "1.25rem" }}>
+                  <div style={{ fontSize: "1.75rem", lineHeight: 1 }}>{s.icon}</div>
+                  <span style={{
+                    fontFamily: "'Playfair Display', serif",
+                    fontSize: "2rem",
+                    fontWeight: 700,
+                    color: "rgba(14,35,24,.06)",
+                    lineHeight: 1,
+                    letterSpacing: "-.04em",
+                  }}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <h3 style={{ fontSize: "1rem", fontWeight: 600, color: "var(--ink)", marginBottom: ".5rem", letterSpacing: "-.01em" }}>{s.name}</h3>
                 <p style={{ fontSize: ".9375rem", color: "var(--body)", lineHeight: 1.65, marginBottom: ".75rem" }}>{s.short}</p>
                 <p style={{ fontSize: ".875rem", color: "var(--muted)", lineHeight: 1.6 }}>{s.description}</p>
               </article>
             ))}
           </div>
-
-          <div style={{ marginTop: "2rem" }}>
-            <Link href="/services" className="btn btn-ghost">View all services</Link>
-          </div>
         </div>
       </section>
 
-      {/* ── Why us ───────────────────────────────────────────── */}
-      <section style={{ padding: "5rem 1.5rem", background: "var(--sage)" }}>
-        <div style={{ maxWidth: "72rem", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "center" }} className="why-grid">
-          <div>
-            <h2 className="display" style={{ fontSize: "clamp(1.875rem, 4vw, 2.75rem)", fontWeight: 400, letterSpacing: "-.02em", color: "var(--ink)", marginBottom: ".75rem" }}>
+      {/* ── Why us — horizontal strip ─────────────────────────── */}
+      <section style={{ padding: "5.5rem 1.5rem", background: "var(--forest)" }}>
+        <div style={{ maxWidth: "72rem", margin: "0 auto" }}>
+          <div style={{ marginBottom: "3rem" }}>
+            <h2 className="display" style={{ fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 400, letterSpacing: "-.025em", color: "white", lineHeight: 1.1 }}>
               Why WF Uwais?
             </h2>
-            <p style={{ color: "var(--body)", lineHeight: 1.75, fontSize: "1rem", maxWidth: "30rem" }}>
-              We understand property managers and residence committees need a cleaning partner they can stop thinking about — one that just works, every time.
+            <p style={{ color: "rgba(255,255,255,.45)", marginTop: ".5rem", fontSize: ".9375rem", maxWidth: "32rem" }}>
+              Property managers and residence committees need a cleaning partner they can stop thinking about.
             </p>
           </div>
-          <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: ".75rem" }}>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "1px", background: "rgba(255,255,255,.08)", border: "1px solid rgba(255,255,255,.08)", borderRadius: ".375rem", overflow: "hidden" }}>
             {COMPANY.usps.map((usp, i) => (
-              <li key={i} className="usp-row">
-                <span style={{ flexShrink: 0, width: "1.375rem", height: "1.375rem", background: "var(--moss)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontSize: ".6875rem", fontWeight: 700 }}>✓</span>
-                <span style={{ fontSize: ".9375rem", color: "var(--body)", lineHeight: 1.55 }}>{usp}</span>
-              </li>
+              <div key={i} style={{ padding: "1.625rem 1.5rem", background: "var(--forest)" }}>
+                <div style={{ width: "1.5rem", height: "1.5rem", background: "var(--moss)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1rem" }}>
+                  <span style={{ color: "white", fontSize: ".625rem", fontWeight: 700 }}>✓</span>
+                </div>
+                <p style={{ fontSize: ".9375rem", color: "rgba(255,255,255,.75)", lineHeight: 1.6 }}>{usp}</p>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </section>
 
-      {/* ── Clients ──────────────────────────────────────────── */}
-      <section style={{ padding: "5rem 1.5rem", background: "var(--surface)" }}>
+      {/* ── Clients — editorial list ──────────────────────────── */}
+      <section style={{ padding: "5.5rem 1.5rem", background: "var(--surface)" }}>
         <div style={{ maxWidth: "72rem", margin: "0 auto" }}>
-          <div style={{ marginBottom: "2rem" }}>
-            <h2 className="display" style={{ fontSize: "clamp(1.875rem, 4vw, 2.75rem)", fontWeight: 400, letterSpacing: "-.02em", color: "var(--ink)", marginBottom: ".5rem" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "2.5rem", flexWrap: "wrap", gap: "1rem" }}>
+            <h2 className="display" style={{ fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 400, letterSpacing: "-.025em", color: "var(--ink)", lineHeight: 1.1 }}>
               Trusted by
             </h2>
-            <p style={{ color: "var(--muted)", fontSize: "1rem" }}>Residential estates, retail outlets, and commercial properties.</p>
+            <p style={{ color: "var(--muted)", fontSize: ".875rem" }}>Residences · Retail · Commercial</p>
           </div>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: ".625rem" }}>
-            {CLIENTS.map(c => (
-              <span key={c.name} className="client-badge">{c.name}</span>
+
+          <div style={{ borderTop: "1px solid var(--border)" }}>
+            {CLIENTS.map((c, i) => (
+              <div key={c.name} style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "1.125rem 0",
+                borderBottom: "1px solid var(--border)",
+              }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "1.25rem" }}>
+                  <span style={{
+                    fontFamily: "'Playfair Display', serif",
+                    fontSize: "1rem",
+                    color: "rgba(14,35,24,.12)",
+                    fontWeight: 700,
+                    minWidth: "2rem",
+                  }}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span style={{ fontSize: "1rem", color: "var(--ink)", fontWeight: 450 }}>{c.name}</span>
+                </div>
+                <span style={{ fontSize: ".8125rem", color: "var(--muted)", fontWeight: 500 }}>{c.type}</span>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── CTA ──────────────────────────────────────────────── */}
-      <section style={{ padding: "5rem 1.5rem", background: "var(--forest)" }}>
-        <div style={{ maxWidth: "72rem", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr auto", gap: "2rem", alignItems: "center" }} className="cta-grid">
-          <div>
-            <h2 className="display" style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)", color: "white", fontWeight: 400, letterSpacing: "-.02em", marginBottom: ".625rem" }}>
-              Ready for a cleaner space?
-            </h2>
-            <p style={{ color: "rgba(255,255,255,.5)", fontSize: "1rem" }}>
-              Serving {COMPANY.serviceAreas[0]} and {COMPANY.serviceAreas[1]}.
-            </p>
+      <section style={{ padding: "5.5rem 1.5rem", background: "var(--forest)" }}>
+        <div style={{ maxWidth: "72rem", margin: "0 auto" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: "2rem", alignItems: "center" }} className="cta-grid">
+            <div>
+              <h2 className="display" style={{ fontSize: "clamp(1.875rem, 4vw, 3rem)", color: "white", fontWeight: 400, letterSpacing: "-.025em", lineHeight: 1.1, marginBottom: ".75rem" }}>
+                Ready for a cleaner space?
+              </h2>
+              <p style={{ color: "rgba(255,255,255,.45)", fontSize: ".9375rem" }}>
+                Serving {COMPANY.serviceAreas[0]} and {COMPANY.serviceAreas[1]}.
+              </p>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: ".625rem", alignItems: "flex-end" }}>
+              <Link href="/contact" className="btn btn-gold" style={{ fontSize: "1rem", padding: ".875rem 2rem" }}>
+                Request a Quote
+              </Link>
+              <a href={`tel:${COMPANY.phone}`} style={{ color: "rgba(255,255,255,.4)", fontSize: ".8125rem", textDecoration: "none", textAlign: "center" }}>
+                or call {COMPANY.phone}
+              </a>
+            </div>
           </div>
-          <Link href="/contact" className="btn btn-gold" style={{ fontSize: "1rem", padding: ".875rem 2rem", whiteSpace: "nowrap" }}>
-            Request a Quote
-          </Link>
         </div>
       </section>
 
       <style>{`
-        @media (max-width: 768px) {
-          .why-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+        @media (max-width: 640px) {
           .cta-grid { grid-template-columns: 1fr !important; }
+          .cta-grid > div:last-child { align-items: flex-start !important; }
+          .stat-strip { flex-wrap: wrap; }
+          .stat-strip-item { min-width: 50%; border-bottom: 1px solid rgba(255,255,255,.08); }
         }
       `}</style>
     </>
